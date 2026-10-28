@@ -39,6 +39,13 @@ function onPointerMove(event: PointerEvent) {
 function onPointerUp() {
   dragging = false
 }
+
+// Converts a screen position into board coordinates.
+function toWorld(screenX: number, screenY: number) {
+  return { x: (screenX - offset.x) / scale.value, y: (screenY - offset.y) / scale.value }
+}
+
+defineExpose({ toWorld })
 </script>
 
 <template>
