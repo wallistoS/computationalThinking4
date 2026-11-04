@@ -1,0 +1,36 @@
+meta {
+  name: POST object
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/objects
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "id": "{{id}}",
+    "type": "sticky-note",
+    "x": 100,
+    "y": 100,
+    "width": 192,
+    "height": 192,
+    "text": "",
+    "color": "yellow",
+    "fontSize": 18,
+    "bold": false
+  }
+}
+
+vars:pre-request {
+  baseUrl: http://localhost:3001
+  id: id2
+}
+
+assert {
+  res.status: eq 201
+  res.body.id: eq {{id}}
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "hi ich bin tobi",
+    "type": "sticky-note",
+    "x": 624,
+    "y": 216,
+    "width": 192,
+    "height": 192,
+    "color": "pink",
+    "text": "hi ich bin tobi",
+    "fontSize": 18,
+    "bold": false
+  },
+  {
+    "x": 800,
+    "y": 408,
+    "width": 192,
+    "height": 192,
+    "text": "",
+    "fontSize": 18,
+    "bold": false,
+    "type": "sticky-note",
+    "color": "green",
+    "id": "b34c2f5e-2fa4-4f7a-8254-e063f4bf8c1a"
+  },
+  {
+    "id": "id30",
+    "type": "sticky-note",
+    "x": 504,
+    "y": 480,
+    "width": 192,
+    "height": 192,
+    "color": "pink",
+    "text": "id3test",
+    "fontSize": 18,
+    "bold": false
+  }
+]

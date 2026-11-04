@@ -1,0 +1,27 @@
+meta {
+  name: PATCH object
+  type: http
+  seq: 4
+}
+
+patch {
+  url: {{baseUrl}}/objects/{{id}}
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "x": 250
+  }
+}
+
+vars:pre-request {
+  id: b34c2f5e-2fa4-4f7a-8254-e063f4bf8c1a
+  baseUrl: http://localhost:3001
+}
+
+assert {
+  res.status: eq 200
+  res.body.x: eq 250
+}
