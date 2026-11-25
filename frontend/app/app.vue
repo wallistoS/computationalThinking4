@@ -11,13 +11,22 @@ const VARIANTS: Record<BoardObject['type'], Component> = {
 }
 
 const { objects, load, addObject, resizeObject, updateText, updateStyle } = useBoard()
-await callOnce(load)
+const boards = useBoards()
 
 // Local UI state of this user; it is not part of the shared board state.
 const scale = ref(1)
 const offset = ref({ x: 0, y: 0 })
 const selectedId = ref<string | null>(null)
 const editingId = ref<string | null>(null)
+
+// Whenever another board is opened, show its objects and forget the selection.
+// The boards load without await, so the watcher belongs to a fully set up component.
+watch(boards.currentId, (id) => {
+  selectedId.value = null
+  editingId.value = null
+  if (id) load(id)
+})
+boards.load()
 
 const gesture = useObjectGesture(scale)
 useShortcuts(selectedId, editingId)
@@ -75,4 +84,5 @@ function onEdit(object: BoardObject) {
     @change="changes => updateStyle(selectedObject!.id, changes)"
   />
   <ObjectToolbar @add="onAdd" />
+  <BoardMenu />
 </template>

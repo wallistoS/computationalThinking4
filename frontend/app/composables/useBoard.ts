@@ -22,14 +22,17 @@ const pendingChanges = new Map<string, { changes: ObjectChanges; timer: ReturnTy
 export function useBoard() {
   const api = $fetch.create({ baseURL: useRuntimeConfig().public.apiBase })
   const objects = useState<BoardObject[]>('objects', () => [])
+  const currentBoardId = useState<string | null>('objectsBoardId', () => null)
 
-  async function load() {
-    objects.value = await api<BoardObject[]>('/objects')
+  // Loads the objects of one board; new objects are then added to that board.
+  async function load(boardId: string) {
+    currentBoardId.value = boardId
+    objects.value = await api<BoardObject[]>(`/boards/${boardId}/objects`)
   }
 
   function insert(object: BoardObject) {
     objects.value = [...objects.value, object]
-    api('/objects', { method: 'POST', body: object })
+    api(`/boards/${currentBoardId.value}/objects`, { method: 'POST', body: object })
   }
 
   function addObject(template: ObjectTemplate, centerX: number, centerY: number) {
